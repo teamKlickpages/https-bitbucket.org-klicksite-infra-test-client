@@ -97,7 +97,7 @@ export default {
       return next;
     },
     moveTo(task, stage, index) {
-      this.axios.put(`http://127.0.0.1:3000/tasks/${task.id}`, {
+      this.axios.put(`${process.env.API_URL}/tasks/${task.id}`, {
         stage_id: stage.id
       })
       .then((response) => {
@@ -115,7 +115,7 @@ export default {
         description:this.newTask.description,
         stage_id: 1
       }
-      this.axios.post("http://127.0.0.1:3000/tasks",{task: task}).then( (response) => {
+      this.axios.post(`${process.env.API_URL}/tasks`,{task: task}).then( (response) => {
         this.fetchData();
         this.modalActive = false;
       })
@@ -126,10 +126,10 @@ export default {
       this.modalActive = false;
     },
     fetchData () {
-        this.axios.get("http://127.0.0.1:3000/tasks").then((response) => {
+        this.axios.get(`${process.env.API_URL}/tasks`).then((response) => {
           this.tasks = response.data
         })
-        this.axios.get("http://127.0.0.1:3000/stages").then((response) => {
+        this.axios.get(`${process.env.API_URL}/stages`).then((response) => {
           this.stages = response.data
         })
     }
